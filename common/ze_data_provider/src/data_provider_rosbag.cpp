@@ -410,6 +410,8 @@ bool DataProviderRosbag::dvsSpin(dvs_msgs::EventArrayConstPtr m_dvs,
     LOG_FIRST_N(WARNING, 1) << "Topic in bag that is not subscribed: " << m.getTopic();
   }
 
+  /// Display the number of messages used from the bag file of topic event camera. 
+  ///LOG(INFO) << "+++++ Num processed events:  " << n_processed_event_arrays_;
   return true;
 }
 
