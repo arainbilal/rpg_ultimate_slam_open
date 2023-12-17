@@ -15,3 +15,18 @@ docker run -it  \
     osrf/ros:noetic-desktop-full
 ```
 
+# Build
+
+## Catkin Tools
+```
+sudo apt-get install wget git libtool m4 automake
+sudo apt-get install python3-catkin-tools
+sudo apt install python3-vcstool
+```
+
+## Dependencies
+
+```
+cd src/
+vcs-import < rpg_ultimate_slam_open/dependencies.yaml
+```

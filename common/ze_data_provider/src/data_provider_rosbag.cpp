@@ -57,7 +57,8 @@ DataProviderRosbag::DataProviderRosbag(
   , imu_topic_imuidx_map_(imu_topic_imuidx_map)
   , uses_split_messages_(false)
 {
-  VLOG(1) << "Create Dataprovider for synchronized Gyro/Accel";
+  //VLOG(1) << "Create Dataprovider for synchronized Gyro/Accel";
+  LOG(INFO) << "+++++++++ Create Dataprovider for synchronized Gyro/Accel";
   //! @todo: Display number of messages per topic in the beginning.
 
   loadRosbag(bag_filename);
@@ -74,7 +75,8 @@ DataProviderRosbag::DataProviderRosbag(
   if (FLAGS_vio_use_events_and_images || !FLAGS_vio_use_events) {
     for (auto it : img_topic_camidx_map_)
     {
-      VLOG(1) << "Subscribing to: " << it.first;
+      //VLOG(1) << "Subscribing to: " << it.first;
+      LOG(INFO) << "+++++++ Subscribing to: " << it.first;
       topics.push_back(it.first);
     }
   }
@@ -82,14 +84,16 @@ DataProviderRosbag::DataProviderRosbag(
   if (FLAGS_vio_use_events_and_images || FLAGS_vio_use_events){
     for (auto it : dvs_topic_camidx_map_)
     {
-      VLOG(1) << "Subscribing to: " << it.first;
+      //VLOG(1) << "Subscribing to: " << it.first;
+      LOG(INFO) << "+++++++ Subscribing to: " << it.first;
       topics.push_back(it.first);
     }
   }
 
   for (auto it : imu_topic_imuidx_map_)
   {
-    VLOG(1) << "Subscribing to: " << it.first;
+    //VLOG(1) << "Subscribing to: " << it.first;
+    LOG(INFO) << "+++++++ Subscribing to: " << it.first;
     topics.push_back(it.first);
   }
 
@@ -170,9 +174,11 @@ void DataProviderRosbag::initBagView(const std::vector<std::string>& topics)
 
     // Retrieve begin and end times from the bag file (given the topic query).
     const ros::Time absolute_time_offset = bag_view_->getBeginTime();
-    VLOG(2) << "Bag begin time: " << absolute_time_offset;
+    //VLOG(2) << "Bag begin time: " << absolute_time_offset;
+    LOG(INFO) << "Bag begin time: " << absolute_time_offset;
     const ros::Time absolute_end_time = bag_view_->getEndTime();
-    VLOG(2) << "Bag end time: " << absolute_end_time;
+    //VLOG(2) << "Bag end time: " << absolute_end_time;
+    LOG(INFO) << "Bag end time: " << absolute_end_time;
     if (absolute_end_time < absolute_time_offset)
     {
       LOG(FATAL) << "Invalid bag end time: "
@@ -493,12 +499,14 @@ bool DataProviderRosbag::ok() const
 {
   if (!running_)
   {
-    VLOG(1) << "Data Provider was paused/terminated.";
+    //VLOG(1) << "Data Provider was paused/terminated.";
+    LOG(INFO) << "Data Provider was paused/terminated.";
     return false;
   }
   if (bag_view_it_ == bag_view_->end())
   {
-    VLOG(1) << "All data processed.";
+    //VLOG(1) << "All data processed.";
+    LOG(INFO) << "++++++++++++++ All data processed. ++++++++++++++";
     return false;
   }
   return true;
