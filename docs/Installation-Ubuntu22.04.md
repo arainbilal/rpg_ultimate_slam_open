@@ -1,0 +1,17 @@
+# Installation of Ultimate SLAM on Ubuntu 22.04
+
+## Docker script
+
+```
+xhost +local:docker
+docker run -it  \
+    --privileged \
+    --network=host \
+    -v /dev/bus/usb:/dev/bus/usb \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -v /home/bilal/src/catkin_ws:/ws \
+    -e DISPLAY=unix$DISPLAY \
+    --name="noetic-container" \
+    osrf/ros:noetic-desktop-full
+```
+
